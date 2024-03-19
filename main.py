@@ -1,18 +1,32 @@
-def locate_card(cards, query):
-    pass
+class Vector:
+    def __init__(self, d) -> None:
+        self._coords = [0] * d
 
-cards = [13, 11, 10, 7, 4, 3, 1, 0]
-query = 7
-output = 3
+    def __len__(self):
+        return len(self._coords)
+    
+    def __getitem__(self, j):
+        return self._coords[j]
+    
+    def __setitem__(sefl, j, val):
+        sefl._coords[j] = val
+    
+    def __add__(self, other):
+        if len(self) != len(other):
+            raise ValueError('dimensions must agree')
+        
+        result = Vector(len(self))
 
-test = {
-    'input': { 
-        'cards': [13, 11, 10, 7, 4, 3, 1, 0], 
-        'query': 7
-    },
-    'output': 3
-}
+        for j in range(len(self)):
+            result[j] = self[j] + other[j]
 
-print(locate_card(**test['input']) == test['output'])
-
-
+        return result
+    
+    def __eq__(self, other):
+        return self._coords == other._coords
+    
+    def __ne__(self, other):
+        return not self == other
+    
+    def __str__(self):
+        return '<' + str(self._coords)[1: -1] + '>'
