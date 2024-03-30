@@ -1,30 +1,16 @@
-def test_location(cards, query, mid):
-    mid_n = cards[mid]
-    if mid_n == query:
-        if mid -1 >= 0 and cards[mid -1] == query:
-            return 'left'
-        else:
-            return 'found'
-    elif mid_n < query:
-        return 'left'
-    else:
-        return 'right'
+# Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 <= i < j < n and nums[i] + nums[j] < target.
 
-def locate_cards(cards, q):
-    l, h = 0, len(cards) - 1
+# solution loop through the list twice and append matching tuples to the list and return the length of that list
 
-    while l <= h:
-        mid = (l + h) // 2
-        result = test_location(cards, q, mid)
+def count_pairs(nums, target):
+    res = []
+    for i in range(len(nums)):
+        for j in range(1, len(nums)):
+            if (nums[i] + nums[j]) < target:
+                if i < j:
+                    res.append((i, j))
+    return len(res)
 
-        if result == 'found':
-            return mid
-        elif result == 'left':
-            h = mid - 1
-        elif result =='right':
-            l = mid + 1
-    return -1
+nums = [-6,2,5,-2,-7,-1,3]
 
-cards = [9, 8, 7, 6, 5, 4, 3, 2, 1]
-
-print(locate_cards(cards, 8))
+print(count_pairs(nums, -2))
