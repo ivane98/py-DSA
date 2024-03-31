@@ -1,16 +1,19 @@
-# Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 <= i < j < n and nums[i] + nums[j] < target.
+class User:
+    def __init__(self, username, name, email) -> None:
+        self.username = username
+        self.name = name
+        self.email = email
+        print('User Created')
 
-# solution loop through the list twice and append matching tuples to the list and return the length of that list
+    def intro_yourself(self, guest_name):
+        print(f"Hi {guest_name}, i'am {self.name} contact me at {self.email}")
 
-def count_pairs(nums, target):
-    res = []
-    for i in range(len(nums)):
-        for j in range(1, len(nums)):
-            if (nums[i] + nums[j]) < target:
-                if i < j:
-                    res.append((i, j))
-    return len(res)
+    def __repr__(self) -> str:
+        return f"User(username={self.username}, name={self.name}, email={self.email})"
+    
+    def __str__(self) -> str:
+        return self.__repr__()
 
-nums = [-6,2,5,-2,-7,-1,3]
 
-print(count_pairs(nums, -2))
+user1 = User('john', 'John Doe', 'john@doe.com')
+print(user1)
