@@ -1,19 +1,45 @@
-class User:
-    def __init__(self, username, name, email) -> None:
-        self.username = username
-        self.name = name
-        self.email = email
-        print('User Created')
+import os
 
-    def intro_yourself(self, guest_name):
-        print(f"Hi {guest_name}, i'am {self.name} contact me at {self.email}")
+# a generic binary search
+def binary_search(data, target, low, high):
+    if low > high:
+        return False
+    else:
+        mid = (low + high)//2
+        if data[mid] == target:
+            return True
+        elif data[mid] < target:
+            return binary_search(data, target, mid + 1, high)
+        else:
+            return binary_search(data, target, low, mid - 1)
+        
 
-    def __repr__(self) -> str:
-        return f"User(username={self.username}, name={self.name}, email={self.email})"
+# calculates total amount of disk space in kbs for entire directory and its subdirectories
+def disk_usage(path):
+    total = os.path.getsize(path)
+
+    if os.path.isdir(path):
+        for filename in os.listdir(path):
+            childpath = os.path.join(path, filename)
+            total += disk_usage(childpath)
+    return total
+
+
+def power(x, n):
+    if n ==0:
+        return 1
+    else:
+        print(n)
+        return x * power(x, n-1)
     
-    def __str__(self) -> str:
-        return self.__repr__()
+print(power(2, 4))
+
+# 2 * power(2, 3) == 2 * 8 == 16
+# 2 * power(2, 2) == 2 * 4 == 8
+# 2 * power(2, 1) == 2 * 2 == 4
+# 2 * power(2, 0) == 2 * 1 == 2
 
 
-user1 = User('john', 'John Doe', 'john@doe.com')
-print(user1)
+
+
+
